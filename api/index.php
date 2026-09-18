@@ -1,9 +1,5 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
-
-$app = require_once __DIR__ . '/../bootstrap/app.php';
-
-$app->handleRequest(
-    Illuminate\Http\Request::capture()
-);
+echo "PHP BERHASIL";
+echo "<br>";
+echo "PHP Version: " . PHP_VERSION;
