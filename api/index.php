@@ -1,41 +1,50 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+$logFile = '/tmp/laravel-debug.log';
+
+function debugLog($message)
+{
+    global $logFile;
+    file_put_contents(
+        $logFile,
+        date('Y-m-d H:i:s') . ' - ' . $message . PHP_EOL,
+        FILE_APPEND
+    );
+}
+
 try {
+    debugLog('STEP 1 - Starting');
+
     require __DIR__ . '/../vendor/autoload.php';
+    debugLog('STEP 2 - Composer loaded');
 
     $app = require_once __DIR__ . '/../bootstrap/app.php';
+    debugLog('STEP 3 - Laravel bootstrap loaded');
 
     $request = Illuminate\Http\Request::capture();
+    debugLog('STEP 4 - Request created');
+    
+    debugLog('STEP 5 - Before handleRequest');
 
-    echo "Laravel bootstrap berhasil<br>";
-    echo "Request berhasil dibuat<br>";
+    $app->handleRequest($request);
 
-    $response = $app->handleRequest($request);
-
-    echo "Handle request berhasil<br>";
-
-    if ($response) {
-        echo "Response class: " . get_class($response) . "<br>";
-        echo "Status: " . $response->getStatusCode() . "<br>";
-    }
+    debugLog('STEP 6 - After handleRequest');
 
 } catch (\Throwable $e) {
+
+    debugLog('ERROR TYPE: ' . get_class($e));
+    debugLog('ERROR MESSAGE: ' . $e->getMessage());
+    debugLog('ERROR FILE: ' . $e->getFile());
+    debugLog('ERROR LINE: ' . $e->getLine());
+
     http_response_code(500);
 
-    echo "<h2>Laravel Request Error</h2>";
-
-    echo "<strong>Type:</strong><br>";
-    echo htmlspecialchars(get_class($e));
-
-    echo "<br><br><strong>Message:</strong><br>";
-    echo nl2br(htmlspecialchars($e->getMessage()));
-
-    echo "<br><br><strong>File:</strong><br>";
-    echo htmlspecialchars($e->getFile());
-
-    echo "<br><br><strong>Line:</strong><br>";
-    echo $e->getLine();
-
-    echo "<br><br><strong>Trace:</strong><br>";
-    echo nl2br(htmlspecialchars($e->getTraceAsString()));
+    echo '<h2>Laravel Error</h2>';
+    echo '<p><b>Type:</b> ' . htmlspecialchars(get_class($e)) . '</p>';
+    echo '<p><b>Message:</b> ' . htmlspecialchars($e->getMessage()) . '</p>';
+    echo '<p><b>File:</b> ' . htmlspecialchars($e->getFile()) . '</p>';
+    echo '<p><b>Line:</b> ' . $e->getLine() . '</p>';
 }
