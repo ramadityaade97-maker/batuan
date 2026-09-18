@@ -153,12 +153,37 @@ h1,h2,h3{font-family:'Cinzel', serif; letter-spacing:0.02em; word-wrap:break-wor
     url('https://bulelengkab.go.id/uploads/konten/81_genggong-kesenian-tradisional-langka-buleleng-pukau-penonton-bdf-2024.jpg') center/cover no-repeat;
   transform: scale(1.02);
 }
+.hero-video-wrap{
+  position:absolute; inset:0;
+  overflow:hidden; background:#070A0C;
+}
+.hero-video-wrap video{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transform: scale(1.02);
+  filter: saturate(1.08) contrast(1.04) brightness(0.92);
+}
 .hero::before{
   content:""; position:absolute; inset:0;
   background: url('https://www.transparenttextures.com/patterns/batik-2.png');
-  opacity:0.07; mix-blend-mode: overlay; pointer-events:none;
+  opacity:0.07; mix-blend-mode: overlay; pointer-events:none; z-index:1;
 }
-.hero-overlay{position:absolute; inset:0; background: linear-gradient(180deg, rgba(7,10,12,0.35) 0%, rgba(7,10,12,0.15) 30%, rgba(7,10,12,0.85) 85%, var(--bg-900) 100%)}
+.hero-overlay{position:absolute; inset:0; background: linear-gradient(180deg, rgba(7,10,12,0.42) 0%, rgba(7,10,12,0.22) 30%, rgba(7,10,12,0.82) 85%, var(--bg-900) 100%); z-index:1}
+.hero-mute-btn{
+  position:absolute; right:22px; bottom:26px; z-index:3;
+  display:inline-flex; align-items:center; gap:8px;
+  padding:9px 14px; border-radius:999px;
+  background:rgba(7,10,12,0.58); backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  border:1px solid rgba(255,255,255,0.14); color:rgba(255,247,232,0.92);
+  font-size:11px; letter-spacing:0.10em; text-transform:uppercase; font-weight:600;
+  cursor:pointer; transition: all 0.3s; box-shadow:0 8px 24px rgba(0,0,0,0.35);
+}
+.hero-mute-btn:hover{background:rgba(255,255,255,0.10); border-color:rgba(212,168,75,0.28); transform:translateY(-1px)}
+.hero-mute-btn.is-live{border-color:rgba(212,168,75,0.35); box-shadow:0 8px 24px rgba(0,0,0,0.35), 0 0 0 4px rgba(212,168,75,0.10)}
+.hero-mute-btn i{font-size:12px; color:var(--gold-light)}
+@media (max-width:640px){
+  .hero-mute-btn{right:14px; bottom:14px; padding:8px 12px; font-size:10px}
+}
 .hero-content{position:relative; z-index:2; max-width:1280px; margin:0 auto; padding:140px 24px 80px; width:100%; display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center}
 .hero-badge{
   display:inline-flex; align-items:center; gap:10px;

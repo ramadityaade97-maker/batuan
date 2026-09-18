@@ -221,15 +221,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ---------- Hero Video: mute toggle + autoplay resilience ---------- */
+  const heroVideo = $('#heroVideo');
+  const muteBtn = $('#heroMuteBtn');
+  const muteIcon = $('#heroMuteIcon');
+  const muteText = $('#heroMuteText');
+  const syncMuteUI = () => {
+    if (!heroVideo || !muteIcon || !muteText || !muteBtn) return;
+    const muted = heroVideo.muted;
+    muteIcon.className = muted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high';
+    muteText.textContent = muted ? 'Suara Mati' : 'Suara Hidup';
+    muteBtn.classList.toggle('is-live', !muted);
+  };
+  if (heroVideo) {
+    // Ensure autoplay works: muted is required; retry play on canplay
+    heroVideo.muted = true;
+    const tryPlay = () => heroVideo.play().catch(()=>{});
+    heroVideo.addEventListener('canplay', tryPlay, { once: true });
+    tryPlay();
+    syncMuteUI();
+  }
+  muteBtn?.addEventListener('click', () => {
+    if (!heroVideo) return;
+    heroVideo.muted = !heroVideo.muted;
+    if (!heroVideo.muted) heroVideo.volume = 0.9;
+    // if unmuted, ensure playing
+    heroVideo.play().catch(()=>{});
+    syncMuteUI();
+  });
+  // Space/Enter not needed - button native
+
   /* ---------- Parallax effect ---------- */
-  const heroBg = $('.hero-bg');
+  const heroVideoWrap = $('.hero-video-wrap');
+  const heroBgFallback = $('.hero-bg'); // kept for backwards compat if reused elsewhere
+  const parallaxTarget = heroVideoWrap?.querySelector('video') || heroBgFallback || $('.hero-video-wrap');
   let ticking = false;
   window.addEventListener('scroll', () => {
-    if (!heroBg || ticking) return;
+    if (!parallaxTarget || ticking) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     ticking = true;
     requestAnimationFrame(() => {
-      const y = window.scrollY * 0.25;
-      heroBg.style.transform = `translateY(${y}px) scale(1.02)`;
+      const y = window.scrollY * 0.22;
+      parallaxTarget.style.transform = `translateY(${y}px) scale(1.02)`;
       ticking = false;
     });
   }, { passive: true });

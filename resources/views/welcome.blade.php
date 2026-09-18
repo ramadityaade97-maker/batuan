@@ -66,8 +66,17 @@
 </div>
 
 <section class="hero" id="beranda">
-    <div class="hero-bg"></div>
+    <div class="hero-video-wrap" aria-hidden="true">
+        <video id="heroVideo" autoplay muted loop playsinline preload="metadata"
+               poster="https://bulelengkab.go.id/uploads/konten/81_genggong-kesenian-tradisional-langka-buleleng-pukau-penonton-bdf-2024.jpg">
+            <source src="{{ asset('videos/genggong-batuan.mp4') }}" type="video/mp4">
+        </video>
+    </div>
     <div class="hero-overlay"></div>
+    <button type="button" class="hero-mute-btn" id="heroMuteBtn" aria-label="Matikan/Suara video">
+        <i class="fa-solid fa-volume-xmark" id="heroMuteIcon"></i>
+        <span id="heroMuteText">Suara Mati</span>
+    </button>
     <div class="hero-content">
         <div>
             <div class="hero-badge"><i></i> Warisan Budaya Tak Benda • Desa Batuan, Gianyar</div>
