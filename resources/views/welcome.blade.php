@@ -11,7 +11,7 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23C1272D'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='white' font-family='serif'>G</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/genggong.css', 'resources/js/genggong.js'])
 </head>
 <body>
 

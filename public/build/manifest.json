@@ -1,17 +1,17 @@
 {
-  "resources/css/app.css": {
-    "file": "assets/app-Cl-bZuI0.css",
-    "src": "resources/css/app.css",
+  "resources/css/genggong.css": {
+    "file": "assets/genggong-DYvHD3V0.css",
+    "src": "resources/css/genggong.css",
     "isEntry": true,
-    "name": "app",
+    "name": "genggong",
     "names": [
-      "app.css"
+      "genggong.css"
     ]
   },
-  "resources/js/app.js": {
-    "file": "assets/app-BDW9Ji6t.js",
-    "name": "app",
-    "src": "resources/js/app.js",
+  "resources/js/genggong.js": {
+    "file": "assets/genggong-5HVdMcgi.js",
+    "name": "genggong",
+    "src": "resources/js/genggong.js",
     "isEntry": true
   }
 }
